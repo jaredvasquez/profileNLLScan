@@ -1,0 +1,12 @@
+Options:
+  InputFile: WS-HGam-muLegacy.root
+  Dataset:   AsimovSB
+  NPoints:   50
+  ModelName: muLegacy
+
+ParametersOfInterest:
+  mu_ggH: [ 0.75, 1.25 ]
+  mu_VBF: [ 0.20, 1.80 ]
+  mu_WH:  [-0.50, 3.50 ]
+  mu_ZH:  [-0.50, 3.50 ]
+  mu_ttH: [-0.20, 2.20 ]

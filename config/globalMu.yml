@@ -1,0 +1,8 @@
+Options:
+  ModelName:  globalMu
+  InputFile:  WS-HGam-muLegacy.root
+  Dataset:    AsimovSB
+  NPoints:    50
+
+ParametersOfInterest:
+  mu: [ 0.75, 1.25 ]
