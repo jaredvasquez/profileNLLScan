@@ -5,8 +5,8 @@ Options:
   ModelName: muLegacy
 
 ParametersOfInterest:
-  mu_ggH: [ 0.60, 1.40, '#mu_{ggH}' ]
+  mu_ggH: [ 0.70, 1.50, '#mu_{ggH}' ]
   mu_VBF: [ 0.00, 2.00, '#mu_{VBF}' ]
-  mu_WH:  [-1.00, 4.00, '#mu_{WH}'  ]
-  mu_ZH:  [-1.00, 4.00, '#mu_{ZH}'  ]
-  mu_ttH: [-0.50, 2.50, '#mu_{ttH}' ]
+  mu_WH:  [-0.50, 4.00, '#mu_{WH}'  ]
+  mu_ZH:  [-0.50, 4.00, '#mu_{ZH}'  ]
+  mu_ttH: [-0.50, 3.50, '#mu_{ttH}' ]

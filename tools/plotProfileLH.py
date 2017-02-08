@@ -53,7 +53,7 @@ for ievt in xrange(npts):
   poiVal = getattr(tc,POIName)
   if (ievt==0): minNLL = tc.nll
   if tc.status:
-    print 'WARNING : FIT FAILED @ %f. Skipping Point.' % poiVal
+    print 'WARNING : FIT FAILED @ %s = %f. Skipping Point.' % (POIName, poiVal)
     continue
   pts.append( (poiVal, 2*(tc.nll-minNLL)) )
 
