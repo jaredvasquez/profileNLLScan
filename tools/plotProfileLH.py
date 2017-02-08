@@ -35,6 +35,7 @@ options = config['Options']
 npts = options['NPoints']
 ModelName = options['ModelName']
 POIName = sys.argv[2]
+POITitle = config['ParametersOfInterest'][POIName][2]
 
 
 # Get points
@@ -49,11 +50,12 @@ for i in xrange(npts): tc.AddFile( os.path.join(dirPATH,'result_%d.root'%i) )
 
 for ievt in xrange(npts):
   tc.GetEntry(ievt)
+  poiVal = getattr(tc,POIName)
   if (ievt==0): minNLL = tc.nll
   if tc.status:
-    print 'WARNING : FIT FAILED @ %f. Skipping Point.' % tc.mu
+    print 'WARNING : FIT FAILED @ %f. Skipping Point.' % poiVal
     continue
-  pts.append( (tc.mu, 2*(tc.nll-minNLL)) )
+  pts.append( (poiVal, 2*(tc.nll-minNLL)) )
 
 pts.sort( key=lambda tup: tup[0] )
 xmin = min(pts,key=lambda x:x[0])[0]
@@ -101,8 +103,10 @@ can.SetMargin( 0.10, 0.05, 0.13, 0.15 )
 h = r.TH1F('hist','',npts,xmin,xmax)
 h.SetMaximum(ymax+0.01)
 h.SetMinimum(1e-06)
-h.GetXaxis().SetTitle('#mu')
-h.GetYaxis().SetTitle('#lambda(#mu)')
+#h.GetXaxis().SetTitle('#mu')
+#h.GetYaxis().SetTitle('#lambda(#mu)')
+h.GetXaxis().SetTitle(POITitle)
+h.GetYaxis().SetTitle('-2#Delta#mathcal{L}')
 h.GetYaxis().SetTitleOffset(0.7)
 h.GetXaxis().SetTitleSize(0.05)
 h.GetYaxis().SetTitleSize(0.05)
@@ -181,8 +185,8 @@ leg2 = drawLegItem( 0.79, 0.92, '#pm 2#sigma', scolors[2] )
 # ---------------------------------------------------------------
 h.Draw('AXIS SAME')
 
-for ext in ['pdf','png']:
-  os.system('mkdir -p plots/%s/%s' % (ModelName,ext) )
-  can.SaveAs('plots/%s/%s/%s.%s' % (ModelName,ext,POIName,ext))
+for ext in ['pdf']:
+  os.system('mkdir -p plots/%s' % (ModelName) )
+  can.SaveAs('plots/%s/%s.%s' % (ModelName,POIName,ext))
 
 
