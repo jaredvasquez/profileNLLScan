@@ -13,17 +13,30 @@ def submitFile( filePATH ):
   npoints = options['NPoints']+2
   for poi in pois:
 
+    # Submit fit jobs
     opts = [
       '-a 0-%d' % npoints,
       '--export=\"ATLAS_LOCAL_ROOT_BASE\"',
-      '--job-name=%s_%s' % (options['ModelName'],poi),
+      '--job-name=fit::%s_%s' % (options['ModelName'],poi),
       '--output=\"logs/%s_%s-%%a.log\"' % (options['ModelName'],poi),
       ]
 
     cmd = 'sbatch {options} ./scripts/jobFit.sh {config} {poi}'
     cmd = cmd.format( options=' '.join(opts), config=filePATH, poi=poi )
     jobid = commands.getstatusoutput(cmd)[1].split()[-1]
-    print 'Dependency for jobid', jobid
+
+    # Submit plot jobs
+    opts = [
+      '--depend=afterok:%s' % jobid,
+      '--export=\"ATLAS_LOCAL_ROOT_BASE\"',
+      '--job-name=plot::%s_%s' % (options['ModelName'],poi),
+      '--output=\"logs/%s_%s-plot.log\"' % (options['ModelName'],poi),
+      ]
+
+    cmd = 'sbatch {options} ./scripts/jobPlot.sh {config} {poi}'
+    cmd = cmd.format( options=' '.join(opts), config=filePATH, poi=poi )
+    os.system(cmd)
+    #print 'Dependency for jobid', jobid
 
 
 #------------------------------------------------------------------------------

@@ -5,4 +5,4 @@ Options:
   NPoints:    50
 
 ParametersOfInterest:
-  mu: [ 0.75, 1.25 ]
+  mu: [ 0.75, 1.40 ]

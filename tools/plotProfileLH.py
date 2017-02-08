@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+import os
+import sys
+import yaml
 import ROOT as r
 import numpy as np
 from scipy.optimize import root, fsolve
@@ -5,15 +9,13 @@ from scipy.optimize import root, fsolve
 r.gStyle.SetOptStat(0)
 
 # fix TLatex from making everything bold
+# ---------------------------------------------------------------
 def DrawNDC(self, x, y, text): self.DrawLatexNDC( x, y, '#bf{ %s }' % text )
 r.TLatex.DrawNDC = DrawNDC
 
-# Fake profile LH curve
-def f(x):
-  if (x<1): return 1.9*(x-1)**2
-  return 1.2*(x-1)**2
 
 # Prepare TGraphs
+# ---------------------------------------------------------------
 scolors = [None, r.kGreen-9, r.kYellow-9]
 tg = [ r.TGraph() for i in xrange(3) ]
 for i in xrange(3):
@@ -21,13 +23,30 @@ for i in xrange(3):
   tg[i].SetLineWidth(1)
   if scolors[i]: tg[i].SetFillColor( scolors[i] )
 
+
+# Get User Arguments
+# ---------------------------------------------------------------
+if (len(sys.argv) <= 2):
+  print '%s Config POIName' % sys.argv[0]; sys.exit()
+
+config = yaml.safe_load(open(sys.argv[1]))
+options = config['Options']
+
+npts = options['NPoints']
+ModelName = options['ModelName']
+POIName = sys.argv[2]
+
+
 # Get points
-npts=102
+# ---------------------------------------------------------------
 minNLL = -999
-xmin, xmax, ymax = -0.5, 3.5, 6.0
-pts = [] #[ (x, f(x)) for x in np.linspace( xmin, xmax, npts ) ]
+ymax = 6.0
+pts = []
+
 tc = r.TChain('nllscan')
-for i in xrange(npts): tc.AddFile('results_%d.root'%i)
+dirPATH = 'output/%s/%s/' % (ModelName,POIName)
+for i in xrange(npts): tc.AddFile( os.path.join(dirPATH,'result_%d.root'%i) )
+
 for ievt in xrange(npts):
   tc.GetEntry(ievt)
   if (ievt==0): minNLL = tc.nll
@@ -35,17 +54,19 @@ for ievt in xrange(npts):
     print 'WARNING : FIT FAILED @ %f. Skipping Point.' % tc.mu
     continue
   pts.append( (tc.mu, 2*(tc.nll-minNLL)) )
+
 pts.sort( key=lambda tup: tup[0] )
-#pts = [ (x, f(x)) for x in np.linspace( xmin, xmax, npts ) ]
 xmin = min(pts,key=lambda x:x[0])[0]
 xmax = max(pts,key=lambda x:x[0])[0]
-xmin -= abs(xmax-xmin)*0.05
-xmax += abs(xmax-xmin)*0.05
+
 
 # Fill TGraphs
+# ---------------------------------------------------------------
 for i in xrange(npts): tg[0].SetPoint( i, pts[i][0], pts[i][1] )
 
+
 # Get spline and find 1 sigma and 2 sigma intercepts
+# ---------------------------------------------------------------
 sp = r.TSpline3('s',tg[0])
 x0  = root(lambda x : sp.Eval(x), x0=1.0).x[0]
 x2p = root(lambda x: np.abs(4 - sp.Eval(x)), x0=xmax).x[0]
@@ -55,9 +76,10 @@ x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
 xbs = [ None, (x1m,x1p), (x2m,x2p) ]
 errors = [ ( abs(x0-x1p), -abs(x0-x1m) ), ( abs(x0-x2p), -abs(x0-x2m) ) ]
 
-print ' mu = %.3f +/- (%.3f,%.3f) ++/-- (%.3f,%.3f)' % ( x0, errors[0][0], errors[0][1], errors[1][0], errors[1][1] )
+print ' mu = %.3f +/- (%.3f,%.3f) ++/-- (%.3f,%.3f) \n' % ( x0, errors[0][0], errors[0][1], errors[1][0], errors[1][1] )
 
 # Make 1 sigma and 2 sigma bands
+# ---------------------------------------------------------------
 n = 501
 xs = np.linspace(x1m,x1p,n)
 for i in xrange(n):
@@ -70,7 +92,9 @@ for i in xrange(n):
   tg[2].SetPoint( i,   xs[i],  sp.Eval(xs[i]) )
   tg[2].SetPoint( n+i, xs[n-i-1], ymax )
 
+
 # Prep the canvas
+# ---------------------------------------------------------------
 can = r.TCanvas()
 can.cd()
 can.SetMargin( 0.10, 0.05, 0.13, 0.15 )
@@ -84,7 +108,9 @@ h.GetXaxis().SetTitleSize(0.05)
 h.GetYaxis().SetTitleSize(0.05)
 h.Draw('HIST')
 
+
 # Draw guides
+# ---------------------------------------------------------------
 tl = r.TLine()
 tt = r.TLatex()
 tl.SetLineStyle(2)
@@ -100,12 +126,16 @@ for i in xrange(1,3):
     if (xmin < xbs[i][0]): tl.DrawLine( xbs[i][0], 0, xbs[i][0], ymax )
     if (xmax > xbs[i][1]): tl.DrawLine( xbs[i][1], 0, xbs[i][1], ymax )
 
+
 # Draw contours
+# ---------------------------------------------------------------
 tg[2].Draw('F SAME')
 tg[1].Draw('F SAME')
 tg[0].Draw('C SAME')
 
+
 # Draw more guides
+# ---------------------------------------------------------------
 tl.SetLineColor(r.kBlack)
 r.gStyle.SetLineStyleString(11,'15 45');
 for i in xrange( int(xmin), int(xmax)+1 ):
@@ -121,14 +151,18 @@ tl.SetLineWidth(1)
 tl.SetLineStyle(1)
 tl.DrawLine( x0, 0, x0, ymax )
 
+
 # Label the plot
+# ---------------------------------------------------------------
 tt.SetTextSize(0.065)
 tt.SetTextColor( r.kBlack )
 tt.DrawNDC( 0.11, 0.93, '#bf{#it{ATLAS}} Internal' )
 tt.SetTextSize(0.04)
 tt.DrawNDC( 0.11, 0.875, '#it{H #rightarrow #gamma#gamma}, #it{m_{H}} = 125.09 GeV' )
 
+
 # Draw Legend
+# ---------------------------------------------------------------
 tt.SetTextSize(0.055)
 tt.DrawNDC( 0.65, 0.94, 'Total Uncertainty' )
 def drawLegItem( x, y, label, color ):
@@ -143,11 +177,12 @@ leg1 = drawLegItem( 0.66, 0.92, '#pm 1#sigma', scolors[1] )
 leg2 = drawLegItem( 0.79, 0.92, '#pm 2#sigma', scolors[2] )
 
 
-
-
-# Tidy up
+# Tidy up and save output
+# ---------------------------------------------------------------
 h.Draw('AXIS SAME')
-can.SaveAs('profile.png')
-can.SaveAs('profile.pdf')
-#raw_input('Done?')
+
+for ext in ['pdf','png']:
+  os.system('mkdir -p plots/%s/%s' % (ModelName,ext) )
+  can.SaveAs('plots/%s/%s/%s.%s' % (ModelName,ext,POIName,ext))
+
 
