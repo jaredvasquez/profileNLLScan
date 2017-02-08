@@ -1,3 +1,6 @@
 *.root
 *.pcm
+logs
+plots
 output
+workspaces

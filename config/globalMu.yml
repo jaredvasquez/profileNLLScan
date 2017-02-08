@@ -1,6 +1,6 @@
 Options:
   ModelName:  globalMu
-  InputFile:  WS-HGam-muLegacy.root
+  InputFile:  workspaces/WS-HGam-muLegacy.root
   Dataset:    AsimovSB
   NPoints:    50
 
