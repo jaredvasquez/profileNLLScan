@@ -78,7 +78,7 @@ x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
 xbs = [ None, (x1m,x1p), (x2m,x2p) ]
 errors = [ ( abs(x0-x1p), -abs(x0-x1m) ), ( abs(x0-x2p), -abs(x0-x2m) ) ]
 
-print ' mu = %.3f +/- (%.3f,%.3f) ++/-- (%.3f,%.3f) \n' % ( x0, errors[0][0], errors[0][1], errors[1][0], errors[1][1] )
+print ' %s = %.3f +/- (%.3f,%.3f) ++/-- (%.3f,%.3f) \n' % ( POIName, x0, errors[0][0], errors[0][1], errors[1][0], errors[1][1] )
 
 # Make 1 sigma and 2 sigma bands
 # ---------------------------------------------------------------
