@@ -185,7 +185,7 @@ leg2 = drawLegItem( 0.79, 0.92, '#pm 2#sigma', scolors[2] )
 # ---------------------------------------------------------------
 h.Draw('AXIS SAME')
 
-for ext in ['pdf']:
+for ext in ['pdf','png']:
   os.system('mkdir -p plots/%s' % (ModelName) )
   can.SaveAs('plots/%s/%s.%s' % (ModelName,POIName,ext))
 
