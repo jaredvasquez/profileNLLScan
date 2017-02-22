@@ -61,10 +61,10 @@ for POIName in pois:
   x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
   err = [ abs(x0-x1p), -abs(x0-x1m) ]
 
-  print ' %20s = %.3f +/- (%+.3f, %+.3f)' % ( POIName, x0, err[0], err[1] )
+  print ' %20s = %.2f +/- (%+.2f, %+.2f)' % ( POIName, x0, err[0], err[1] )
 
   POITitle = POITitle.replace('#','\\')
-  line = '%20s = %.3f^{%+.3f}_{%+.3f} \\\\' % ( POITitle, x0, err[0], err[1] )
+  line = '%20s = %.2f^{%+.2f}_{%+.2f} \\\\' % ( POITitle, x0, err[0], err[1] )
   table.append( line )
 
 print ''
