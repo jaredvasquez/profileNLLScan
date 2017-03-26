@@ -1,0 +1,25 @@
+Options:
+  InputFile: workspaces/WS-HGam-STXSMerged.root
+  Dataset:   AsimovSB
+  NPoints:   50
+  ModelName: gausSTXS
+
+ParametersOfInterest:
+  mu_gg2H_0J:               [ -3.00, 5.00, '#mu_{ggH, 0J}' ]
+  mu_gg2H_1J_ptH_0_60:      [ -3.00, 5.00, '#mu_{ggH, 1J Low}' ]
+  mu_gg2H_1J_ptH_60_120:    [ -3.00, 5.00, '#mu_{ggH, 1J Med}' ]
+  mu_gg2H_1J_ptH_120_200:   [ -3.00, 5.00, '#mu_{ggH, 1J High}' ]
+  mu_gg2H_1J_ptH_gt200:     [ -3.00, 5.00, '#mu_{ggH, 1J BSM}' ]
+  mu_gg2H_ge2J_ptH_0_60:    [ -3.00, 5.00, '#mu_{ggH, 2J Low}' ]
+  mu_gg2H_ge2J_ptH_60_120:  [ -3.00, 5.00, '#mu_{ggH, 2J Med}' ]
+  mu_gg2H_ge2J_ptH_120_200: [ -3.00, 5.00, '#mu_{ggH, 2J High}' ]
+  mu_gg2H_ge2J_ptH_gt200:   [ -3.00, 5.00, '#mu_{ggH, 2J BSM}' ]
+  mu_gg2H_VBFtopo:          [ -3.00, 5.00, '#mu_{ggH, VBFTopo}' ]
+  mu_qq2Hqq_VBFtopo:        [ -3.00, 5.00, '#mu_{qqH, VBFTopo}' ]
+  mu_qq2Hqq_VH2JREST:       [ -3.00, 5.00, '#mu_{VH2J + REST}' ]
+  mu_qq2Hqq_pTjet1_gt200:   [ -3.00, 5.00, '#mu_{qqH BSM}' ]
+  mu_qq2Hlnu_pTV_0_150:     [ -3.00, 5.00, '#mu_{WH, p_{T}^{V} < 150 GeV}' ]
+  mu_qq2Hlnu_pTV_gt150:     [ -3.00, 5.00, '#mu_{WH, p_{T}^{V} > 150 GeV}' ]
+  mu_qq2Hll_pTV_0_150:      [ -3.00, 5.00, '#mu_{ZH, p_{T}^{V} < 150 GeV}' ]
+  mu_qq2Hll_pTV_gt150:      [ -3.00, 5.00, '#mu_{ZH, p_{T}^{V} > 150 GeV}' ]
+  mu_ttH:                   [ -3.00, 5.00, '#mu_{ttH}' ]
