@@ -28,7 +28,7 @@ outDir = 'output/%s/%s' % (options['ModelName'], usepoi)
 outPATH = os.path.join(outDir,'result_%d.root'%ipoint)
 os.system('mkdir -p %s' % outDir)
 
+#cmd = "quickFit -f {file} -d {dataset} -p {pois} -n ATLAS_* -o {output}"
 cmd = "quickFit -f {file} -d {dataset} -p {pois} -o {output}"
-cmd = "quickFit -f {file} -d {dataset} -p {pois} -n ATLAS_* -o {output}"
 cmd = cmd.format( file=options['InputFile'], dataset=options['Dataset'], pois=options['pois'], output=outPATH )
 os.system( cmd )
