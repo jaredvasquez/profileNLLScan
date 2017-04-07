@@ -45,7 +45,7 @@ ymax = 6.0
 pts = []
 
 tc = r.TChain('nllscan')
-dirPATH = 'output/%s/%s/' % (ModelName,POIName)
+dirPATH = 'output/%s/%s/TOTAL' % (ModelName,POIName)
 for i in xrange(npts): tc.AddFile( os.path.join(dirPATH,'result_%d.root'%i) )
 
 for ievt in xrange(npts):
