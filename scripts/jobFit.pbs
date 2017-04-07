@@ -1,0 +1,19 @@
+#!/bin/sh
+
+#PBS -q hep
+#PBS -l nodes=1:ppn=1,mem=2gb
+#PBS -l walltime=1:00:00
+#PBS -o logs/$PBS_JOBNAME
+#PBS -j oe
+#PBS -v ATLAS_LOCAL_ROOT_BASE
+
+cd ~/hsg7root/quickFit/
+until source ./setup.sh; do
+  echo "Sourcing from cvmfs failed. Will try again."
+  sleep 5
+done
+cd $PBS_O_WORKDIR
+
+cmd="./tools/fitPoint.py $@ $PBS_ARRAYID"
+echo $cmd
+$cmd
