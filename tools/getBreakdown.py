@@ -5,7 +5,31 @@ import yaml
 import ROOT as r
 import numpy as np
 from math import sqrt
+from collections import OrderedDict
 from scipy.optimize import root, fsolve
+
+# ---------------------------------------------------------------
+replace = {
+  'mu'     : '\mu',
+  'mu_ggH' : '\mu_{ggH}',
+  'mu_VBF' : '\mu_\mathrm{VBF}',
+  'mu_WH'  : '\mu_\mathrm{WH}',
+  'mu_ZH'  : '\mu_\mathrm{ZH}',
+  'mu_ttH' : '\mu_{t\\bar{t}H}',
+}
+
+
+# ---------------------------------------------------------------
+def ordered_load(stream, Loader=yaml.SafeLoader, object_pairs_hook=OrderedDict):
+  class OrderedLoader(Loader):
+    pass
+  def construct_mapping(loader, node):
+    loader.flatten_mapping(node)
+    return object_pairs_hook(loader.construct_pairs(node))
+  OrderedLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    construct_mapping)
+  return yaml.load(stream, OrderedLoader)
 
 
 # Get User Arguments
@@ -13,7 +37,8 @@ from scipy.optimize import root, fsolve
 if (len(sys.argv) <= 1):
   print '%s Config' % sys.argv[0]; sys.exit()
 
-config = yaml.safe_load(open(sys.argv[1]))
+#config = yaml.safe_load(open(sys.argv[1]))
+config = ordered_load(open(sys.argv[1]))
 options = config['Options']
 
 npts = options['NPoints']
@@ -75,7 +100,7 @@ for POIName in pois:
 
 ## Print output
 
-template  = '%s &= %.2f\ ^{%+.2f}_{%+.2f}'
+template  = '%20s &= %.2f\ ^{%+.2f}_{%+.2f}'
 template += ' = %.2f\ ^{%+.2f}_{%+.2f}\,\mathrm{(stat.)}'
 template += '\ ^{%+.2f}_{%+.2f}\,\mathrm{(syst.)}\\\\'
 
@@ -83,12 +108,15 @@ for POIName in pois:
   x0,  totHI,  totLO = results[POIName]['TOTAL']
   _,  statHI, statLO = results[POIName]['STAT']
 
-  expHI = sqrt( totHI**2 - statHI**2 )
-  expLO = sqrt( totLO**2 - statLO**2 )
+  status = ''
+  if (abs(statHI) > abs(totHI) or abs(statLO) > abs(totLO)):
+    status = '***'
 
-  #print ' %20s = %.2f +/- (%+.2f, %+.2f) = %.2f +/- (%.2f, %.2f) (exp) +/- (%.2f, %.2f) (stat)' \
-  #     % ( POIName, x0, totHI, totHI, x0, expHI, expLO, statHI, statLO)
-  print template % ( POIName, x0, totHI, totHI, x0, expHI, expLO, statHI, statLO)
+  expHI =  sqrt( abs( totHI**2 - statHI**2 ) )
+  expLO = -sqrt( abs( totLO**2 - statLO**2 ) )
+
+  if POIName in replace: POIName = replace[POIName]
+  print template % ( POIName, x0, totHI, totLO, x0, statHI, statLO, expHI, expLO), status
 
 
 #print ''
