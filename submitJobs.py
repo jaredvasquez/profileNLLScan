@@ -13,7 +13,7 @@ def submitFile( filePATH ):
   npoints = options['NPoints']+2
   for poi in pois:
 
-    for errors in ['TOTAL','STAT']:
+    for errors in ['TOTAL','THEO','STAT']:
       # Submit fit jobs
       opts = [
         '-t 0-%d' % npoints,

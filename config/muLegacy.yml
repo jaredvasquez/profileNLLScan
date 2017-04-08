@@ -1,7 +1,7 @@
 Options:
   InputFile: workspaces/WS-HGam-muLegacy.root
   Dataset:   AsimovSB
-  NPoints:   50
+  NPoints:   100
   ModelName: muLegacy
 
 ParametersOfInterest:

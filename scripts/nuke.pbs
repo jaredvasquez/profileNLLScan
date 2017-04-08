@@ -3,10 +3,10 @@
 #PBS -q hep
 #PBS -N HPC_FIX_THIS
 #PBS -l nodes=1:ppn=1,mem=2gb
-#PBS -l walltime=12:00:00
+#PBS -l walltime=72:00:00
 #PBS -o logs/uglyfix
 #PBS -l nodes=compute-17-12:ppn=8
 #PBS -j oe
 
 hostname
-sleep 50000
+sleep 300000
