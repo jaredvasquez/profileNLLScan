@@ -1,26 +1,25 @@
 Options:
-  InputFile: workspaces/WS-HGam-XSMergedFB.root
+  InputFile: workspaces/WS-HGam-XSMerged.root
   Dataset:   AsimovSB
   NPoints:   50
   ModelName: STXS
 
 ## Oops, all thes values are missing BR :( 
 ParametersOfInterest:
-  XS13_gg2H_0J:               [  36.9,  123., '#sigma_{ggH, 0J}' ]
-  XS13_gg2H_1J_ptH_0_60:      [ -15.7,  47.0, '#sigma_{ggH, 1J Low}' ]
-  XS13_gg2H_1J_ptH_60_120:    [ -9.64,  30.0, '#sigma_{ggH, 1J Med}' ]
-  XS13_gg2H_1J_ptH_120_200:   [ -3.42,  6.83, '#sigma_{ggH, 1J High}' ]
-  XS13_gg2H_1J_ptH_gt200:     [ -1.53,  3.07, '#sigma_{ggH, 1J BSM}' ]
-  XS15_gg2H_ge2J_ptH_0_60:    [ -8.85,  17.7, '#sigma_{ggH, 2J Low}' ]
-  XS13_gg2H_ge2J_ptH_60_120:  [ -13.1,  26.3, '#sigma_{ggH, 2J Med}' ]
-  XS13_gg2H_ge2J_ptH_120_200: [ -4.70,  9.40, '#sigma_{ggH, 2J High}' ]
-  XS13_gg2H_ge2J_ptH_gt200:   [ -3.70,  6.17, '#sigma_{ggH, 2J BSM}' ]
-  XS13_gg2H_VBFtopo:          [ -0.50,  5.00, '#sigma_{ggH, VBFTopo}' ]
-  XS13_qq2Hqq_VBFtopo:        [ -0.50,  4.00, '#sigma_{qqH, VBFTopo}' ]
-  XS13_qq2Hqq_VH2JREST:       [ -3.00,  7.00, '#sigma_{VH2J + REST}' ]
-  XS13_qq2Hqq_pTjet1_gt200:   [ -6.00,  7.00, '#sigma_{qqH BSM}' ]
-  XS13_qq2Hlnu_pTV_0_150:     [ -0.50,  7.00, '#sigma_{WH, p_{T}^{V} < 150 GeV}' ]
-  XS13_qq2Hlnu_pTV_gt150:     [ -3.00,  7.00, '#sigma_{WH, p_{T}^{V} > 150 GeV}' ]
-  XS13_qq2Hll_pTV_0_150:      [ -0.50,  7.00, '#sigma_{ZH, p_{T}^{V} < 150 GeV}' ]
-  XS13_qq2Hll_pTV_gt150:      [ -0.50,  7.00, '#sigma_{ZH, p_{T}^{V} > 150 GeV}' ]
-  XS13_ttH:                   [ -0.30,  3.50, '#sigma_{ttH}' ]
+  XS13_gg2H_0J:               [  36.9E-03, 123.0E-03, '#sigma_{ggH, 0J}' ]
+  XS13_gg2H_1J_ptH_0_60:      [ -15.7E-03,  47.0E-03, '#sigma_{ggH, 1J Low}' ]
+  XS13_gg2H_1J_ptH_60_120:    [ -9.64E-03,  30.0E-03, '#sigma_{ggH, 1J Med}' ]
+  XS13_gg2H_1J_ptH_120_200:   [ -3.42E-03,  6.83E-03, '#sigma_{ggH, 1J High}' ]
+  XS13_gg2H_1J_ptH_gt200:     [ -1.53E-03,  3.07E-03, '#sigma_{ggH, 1J BSM}' ]
+  XS15_gg2H_ge2J_ptH_0_60:    [ -8.85E-03,  17.7E-03, '#sigma_{ggH, 2J Low}' ]
+  XS13_gg2H_ge2J_ptH_60_120:  [ -13.1E-03,  26.3E-03, '#sigma_{ggH, 2J Med}' ]
+  XS13_gg2H_ge2J_ptH_120_200: [ -4.70E-03,  9.40E-03, '#sigma_{ggH, 2J High}' ]
+  XS13_gg2H_ge2J_ptH_gt200:   [ -3.70E-03,  6.17E-03, '#sigma_{ggH, 2J BSM}' ]
+  XS13_gg2H_VBFTOPO:          [ -0.50E-03,  5.00E-03, '#sigma_{ggH, VBFTopo}' ]
+  XS13_qq2Hqq_VBFTOPO:        [ -0.50E-03,  4.00E-03, '#sigma_{qqH, VBFTopo}' ]
+  XS13_qq2Hqq_VH2JREST:       [ -3.00E-03,  7.00E-03, '#sigma_{qqH, VH2J + REST}' ]
+  XS13_qq2Hqq_pTjet1_gt200:   [ -6.00E-03,  7.00E-03, '#sigma_{qqH, BSM}' ]
+  XS13_qq2Hlnu_pTV_0_150:     [ -0.50E-03,  7.00E-03, '#sigma_{W(l#nu)H, p_{T}^{V} < 150 GeV}' ]
+  XS13_qq2Hlnu_pTV_gt150:     [ -3.00E-03,  7.00E-03, '#sigma_{W(l#nu)H, p_{T}^{V} > 150 GeV}' ]
+  XS13_qq2Hll:                [ -0.50E-03,  7.00E-03, '#sigma_{Z(ll)H}^{V} < 150 GeV}' ]
+  XS13_ttH:                   [ -0.30E-03,  3.50E-03, '#sigma_{ttH}' ]
