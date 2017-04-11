@@ -8,16 +8,9 @@ from math import sqrt
 from collections import OrderedDict
 from scipy.optimize import root, fsolve
 
-# ---------------------------------------------------------------
-replace = {
-  'mu'     : '\mu',
-  'mu_ggH' : '\mu_{ggH}',
-  'mu_VBF' : '\mu_\mathrm{VBF}',
-  'mu_WH'  : '\mu_\mathrm{WH}',
-  'mu_ZH'  : '\mu_\mathrm{ZH}',
-  'mu_ttH' : '\mu_{t\\bar{t}H}',
-}
+xsec = yaml.safe_load(open('tools/STXSCrossSections.yml'))['CrossSections']
 
+usemu = ('mu' in sys.argv[2::])
 
 # ---------------------------------------------------------------
 def ordered_load(stream, Loader=yaml.SafeLoader, object_pairs_hook=OrderedDict):
@@ -51,7 +44,8 @@ results = { p: {}  for p in pois }
 for POIName in pois:
   POITitle = config['ParametersOfInterest'][POIName][2]
 
-  for error in ['TOTAL','THEO','STAT']:
+  tgs = {}
+  for error in ['TOTAL','STAT']:
     # Get points
     # ---------------------------------------------------------------
     minNLL, pts = -999, []
@@ -73,13 +67,12 @@ for POIName in pois:
     xmin = min(pts,key=lambda x:x[0])[0]
     xmax = max(pts,key=lambda x:x[0])[0]
 
-
     # Fill TGraphs
     # ---------------------------------------------------------------
-    tg = r.TGraph()
+    tgs[error] = r.TGraph()
+    tg = tgs[error]
     for i in xrange(len(pts)):
       tg.SetPoint( i, pts[i][0], pts[i][1] )
-
 
     # Get spline and find 1 sigma and 2 sigma intercepts
     # ---------------------------------------------------------------
@@ -93,36 +86,49 @@ for POIName in pois:
     #print ' %20s = %.2f +/- (%+.2f, %+.2f)' % ( POIName, x0, err[0], err[1] )
     results[POIName][error] = ( x0, err[0], err[1] )
 
-    POITitle = POITitle.replace('#','\\')
-    line = '%20s = %.2f^{%+.2f}_{%+.2f} \\\\' % ( POITitle, x0, err[0], err[1] )
-    table.append( line )
+  # Plot debugging
+  # -----------------------------------------
+  #if ('qq2Hqq_pTjet1_gt200' in POIName):
+  #  tgs['STAT'].SetLineColor( r.kRed )
+  #  tgs['TOTAL'].Draw('AC')
+  #  tgs['STAT'].Draw('C SAME')
+  #  raw_input('done?')
 
 
 ## Print output
 
-template  = '%s &= %.2f\ ^{%+.2f}_{%+.2f}'
+template  = '%s &= %.2f\ ^{%+.2f}_{%+.2f} fb'
 template += ' = %.2f\ ^{%+.2f}_{%+.2f}\,\mathrm{(stat.)}'
-template += '\ ^{%+.2f}_{%+.2f}\,\mathrm{(exp.)}'
-template += '\ ^{%+.2f}_{%+.2f}\,\mathrm{(theory)}\\\\'
+template += '\ ^{%+.2f}_{%+.2f}\,\mathrm{(syst.) fb}\\\\'
+if usemu: template = template.replace(' fb','')
 
 for POIName in pois:
   x0,  totHI,  totLO = results[POIName]['TOTAL']
-  x0,  sthHI,  sthLO = results[POIName]['THEO']
   _,  statHI, statLO = results[POIName]['STAT']
 
   status = ''
-  if (abs(sthHI) > abs(totHI) or abs(sthLO) > abs(totLO) or abs(statHI) > abs(sthHI) or abs(statLO) > abs(sthLO)):
+  if (abs(statHI) > abs(totHI) or abs(statLO) > abs(totLO)):
     status = '***'
+    #print 'tot:   %6.2f  %6.2f' % (totHI, totLO)
+    #print 'stat:  %6.2f  %6.2f' % (statHI, statLO)
 
-  expHI =  sqrt( abs( totHI**2 - sthHI**2 ) )
-  expLO = -sqrt( abs( totLO**2 - sthLO**2 ) )
+  systHI =  sqrt( abs( totHI**2 - statHI**2 ) )
+  systLO = -sqrt( abs( totLO**2 - statLO**2 ) )
 
-  theoHI =  sqrt( abs( sthHI**2 - statHI**2 ) )
-  theoLO = -sqrt( abs( sthLO**2 - statLO**2 ) )
+  POIName = POIName.replace('mu_','')
 
-  title = pois[POIName][2].replace('#','\\')
-  if POIName in replace: POIName = replace[POIName]
-  print template % ( title, x0, totHI, totLO, x0, statHI, statLO, expHI, expLO, theoHI, theoLO), status
+  if not usemu:
+    xsecSM = xsec[POIName]
+    x0     *= xsecSM
+    totHI  *= xsecSM
+    totLO  *= xsecSM
+    systHI *= xsecSM
+    systLO *= xsecSM
+    statHI *= xsecSM
+    statLO *= xsecSM
+
+  name = '\sigma(\mathrm{%s})' % POIName.replace('_','\_')
+  print template % ( name, x0, totHI, totLO, x0, statHI, statLO, systHI, systLO), status
 
 
 #print ''

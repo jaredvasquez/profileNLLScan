@@ -21,6 +21,7 @@ def submitFile( filePATH ):
       ]
       cmd = 'qsub -q hep {options} ./scripts/jobFit.pbs -F \"{config} {poi} {errors}\"'
       cmd = cmd.format( options=' '.join(opts), config=filePATH, poi=poi, errors=errors )
+      #print(cmd)
       os.system(cmd)
 
 #------------------------------------------------------------------------------
