@@ -1,0 +1,12 @@
+Options:
+  InputFile: workspaces/WS-HGam-ProdXS.root
+  Dataset:   AsimovSB
+  NPoints:   100
+  ModelName: prodXS
+
+ParametersOfInterest:
+  mu_ggH: [ 0.70, 1.50, '#sigma / #sigma_{SM} (ggH)' ]
+  mu_VBF: [ 0.40, 1.60, '#sigma / #sigma_{SM} (VBF)' ]
+  mu_WH:  [-0.50, 2.50, '#sigma / #sigma_{SM} (WH)'  ]
+  mu_ZH:  [-0.75, 4.00, '#sigma / #sigma_{SM} (ZH)'  ]
+  mu_ttH: [ 0.00, 2.00, '#sigma / #sigma_{SM} (ttH)' ]

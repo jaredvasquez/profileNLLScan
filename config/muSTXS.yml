@@ -1,6 +1,6 @@
 Options:
   InputFile: workspaces/WS-HGam-STXSMerged.root
-  Dataset:   AsimovSB
+  Dataset:   AsimovSB 
   NPoints:   100
   ModelName: muSTXS
 
