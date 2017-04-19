@@ -20,5 +20,5 @@ ParametersOfInterest:
   mu_qq2Hqq_pTjet1_gt200:   [ -3.00,  5.00, '#sigma / #sigma_{SM} (qqH, BSM)' ]
   mu_qq2Hlnu_pTV_0_150:     [ -1.00,  5.00, '#sigma / #sigma_{SM} (WH, p_{T}^{V} < 150 GeV)' ]
   mu_qq2Hlnu_pTV_gt150:     [ -2.00,  5.00, '#sigma / #sigma_{SM} (WH, p_{T}^{V} > 150 GeV)' ]
-  mu_qq2Hll:                [ -1.00,  4.00, '#sigma / #sigma_{SM} (ZH)' ]
+  mu_pp2Hll:                [ -1.00,  4.00, '#sigma / #sigma_{SM} (ZH)' ]
   mu_ttH:                   [  0.00,  2.00, '#sigma / #sigma_{SM} (ttH)' ]
