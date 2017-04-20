@@ -1,6 +1,7 @@
 CrossSections:
   gg2H_VBFTOPO           : 1.4427e+00
   qq2Hlnu_pTV_gt150      : 1.2435e-01
+  pp2Hll                 : 5.3813E-01
   qq2Hll                 : 4.5736e-01
   qq2Hqq_VBFTOPO         : 2.6837e+00
   qq2Hqq_VH2JREST        : 7.7173e+00
