@@ -43,6 +43,7 @@ POITitle = config['ParametersOfInterest'][POIName][2]
 
 # Get points
 # ---------------------------------------------------------------
+midpt = 1.0
 ymax = 1.2
 for iset, fitset in enumerate(fitsets):
   minNLL = -999
@@ -54,7 +55,10 @@ for iset, fitset in enumerate(fitsets):
 
   for ievt in xrange(npts):
     tc.GetEntry(ievt)
+    midpt = 1.0
     poiVal = getattr(tc,POIName)
+    if (iset==0 & ievt==0):
+      midpt = poiVal
     if (ievt==0): minNLL = tc.nll
     if tc.status:
       print 'WARNING : FIT FAILED @ %s = %f. Skipping Point.' % (POIName, poiVal)
@@ -75,13 +79,15 @@ for iset, fitset in enumerate(fitsets):
 # Get spline and find 1 sigma and 2 sigma intercepts
 # ---------------------------------------------------------------
 sp = r.TSpline3('s',tg[0])
-x0  = root(lambda x : sp.Eval(x), x0=1.0).x[0]
+x0  = root(lambda x : sp.Eval(x), x0=midpt).x[0]
 #x2p = root(lambda x: np.abs(4 - sp.Eval(x)), x0=xmax).x[0]
 #x2m = root(lambda x: np.abs(4 - sp.Eval(x)), x0=xmin).x[0]
 x1p = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmax).x[0]
 x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
 xbs = [ None, (x1m,x1p) ] #, (x2m,x2p) ]
 errors = [ ( abs(x0-x1p), -abs(x0-x1m) ) ]
+
+if (x0 < xmin): x0 = xmin
 
 print ' %s = %.3f +/- (%.3f,%.3f) \n' % ( POIName, x0, errors[0][0], errors[0][1] )
 #print ' %s = %.3f +/- (%.3f,%.3f) ++/-- (%.3f,%.3f) \n' % ( POIName, x0, errors[0][0], errors[0][1], errors[1][0], errors[1][1] )

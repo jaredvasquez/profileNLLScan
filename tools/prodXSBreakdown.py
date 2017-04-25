@@ -77,7 +77,7 @@ for POIName in pois:
     # Get spline and find 1 sigma and 2 sigma intercepts
     # ---------------------------------------------------------------
     sp = r.TSpline3('s',tg)
-    x0  = root(lambda x : sp.Eval(x), x0=1.0).x[0]
+    x0  = root(lambda x : sp.Eval(x), x0=(xmax-xmin)/2.0).x[0]
     x1p = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmax).x[0]
     x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
     err = [ abs(x0-x1p), -abs(x0-x1m) ]
