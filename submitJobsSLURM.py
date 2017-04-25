@@ -15,14 +15,22 @@ def submitFile( filePATH ):
 
     for errors in ['TOTAL','THEO','STAT']:
       # Submit fit jobs
+      #opts = [
+      #  '-t 0-%d' % npoints,
+      #  '-N %s_%s_%s' % (options['ModelName'],poi, errors),
+      #]
       opts = [
-        '-t 0-%d' % npoints,
-        '-N %s_%s_%s' % (options['ModelName'],poi, errors),
+        '-a 0-%d' % npoints,
+        '--export=\"ATLAS_LOCAL_ROOT_BASE\"',
+        '--job-name=%s_%s_%s' % (options['ModelName'],poi, errors),
+        #'-p hep',
+        '--output=\"logs/%s_%s_%s-%%a.log\"' % (options['ModelName'],poi,errors),
       ]
-      cmd = 'qsub -q hep {options} ./scripts/jobFit.pbs -F \"{config} {poi} {errors}\"'
+      #cmd = 'qsub -q hep {options} ./scripts/jobFit.pbs -F \"{config} {poi} {errors}\"'
+      cmd = 'sbatch {options} ./scripts/jobFit.sh {config} {poi} {errors}'
       cmd = cmd.format( options=' '.join(opts), config=filePATH, poi=poi, errors=errors )
-      print(cmd)
-      #os.system(cmd)
+      #print(cmd)
+      os.system(cmd)
 
 #------------------------------------------------------------------------------
 if __name__ == "__main__":
