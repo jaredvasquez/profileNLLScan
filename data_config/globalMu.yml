@@ -1,0 +1,8 @@
+Options:
+  ModelName:  globalMu_data
+  InputFile:  workspaces/WS-HGam-muGlobal.root
+  Dataset:    combData
+  NPoints:    100
+
+ParametersOfInterest:
+  mu: [ 0.70, 1.20, '#mu' ]

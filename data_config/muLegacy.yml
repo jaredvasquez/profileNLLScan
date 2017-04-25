@@ -1,0 +1,13 @@
+Options:
+  ModelName: muLegacy_data
+  InputFile: workspaces/WS-HGam-muLegacy.root
+  Dataset:   combData
+  NPoints:   100
+
+ParametersOfInterest:
+  mu_ggH: [  0.50, 1.30, '#mu_{ggH}' ]
+  mu_VBF: [  0.90, 2.10, '#mu_{VBF}' ]
+  #mu_VH:  [  0.30, 2.50, '#mu_{VH}'  ]
+  mu_ttH: [ -0.25, 1.10, '#mu_{ttH}' ]
+  mu_WH:  [-0.50, 2.50, '#mu_{WH}'  ]
+  mu_ZH:  [-0.75, 2.00, '#mu_{ZH}'  ]
