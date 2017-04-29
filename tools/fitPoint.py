@@ -34,7 +34,7 @@ os.system('mkdir -p %s' % outDir)
 
 cmd = "quickFit -f {file} -d {dataset} -p {pois} -o {output}"
 cmd = cmd.format( file=options['InputFile'], dataset=options['Dataset'], pois=options['pois'], output=outPATH )
-cmd += ' --minTolerance 1.0E-05'
+cmd += ' --minTolerance 1.0E-04'
 cmd += ' -s ucmles'
 
 if   errors == 'STAT':

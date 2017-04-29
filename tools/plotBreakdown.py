@@ -61,7 +61,7 @@ for iset, fitset in enumerate(fitsets):
       midpt = poiVal
     if (ievt==0): minNLL = tc.nll
     if tc.status:
-      print 'WARNING : FIT FAILED @ %s = %f. Skipping Point.' % (POIName, poiVal)
+      print 'WARNING : FIT FAILED IN %s @ %s = %f. POINT %d. Skipping Point.' % (fitset, POIName, poiVal, ievt)
       continue
     pts.append( (poiVal, 2*(tc.nll-minNLL)) )
 
