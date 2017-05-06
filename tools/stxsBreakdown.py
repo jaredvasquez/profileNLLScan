@@ -97,9 +97,9 @@ for POIName in pois:
 
 ## Print output
 
-template  = '%s &= %.2f\ ^{%+.2f}_{%+.2f} fb'
+template  = '%s &= %.2f\ ^{%+.2f}_{%+.2f}\ fb'
 template += ' = %.2f\ ^{%+.2f}_{%+.2f}\,\mathrm{(stat.)}'
-template += '\ ^{%+.2f}_{%+.2f}\,\mathrm{(syst.) fb}\\\\'
+template += '\ ^{%+.2f}_{%+.2f}\,\mathrm{(syst.)}\ fb\\\\'
 if usemu: template = template.replace(' fb','')
 
 for POIName in pois:

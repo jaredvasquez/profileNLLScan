@@ -3,10 +3,13 @@ Options:
   Dataset:   AsimovSB
   NPoints:   100
   ModelName: muLegacy
+  Tolerance: 1.0E-03
 
 ParametersOfInterest:
   mu_ggH: [ 0.70, 1.50, '#mu_{ggH}' ]
   mu_VBF: [ 0.40, 1.60, '#mu_{VBF}' ]
-  mu_WH:  [-0.50, 2.50, '#mu_{WH}'  ]
-  mu_ZH:  [-0.75, 4.00, '#mu_{ZH}'  ]
-  mu_ttH: [ 0.00, 2.00, '#mu_{ttH}' ]
+  mu_VH:  [-0.50, 2.50, '#mu_{VH}'  ]
+  mu_top: [ 0.00, 2.00, '#mu_{top}' ]
+  #mu_WH:  [-0.50, 2.50, '#mu_{WH}'  ]
+  #mu_ZH:  [-0.75, 4.00, '#mu_{ZH}'  ]
+  #mu_ttH: [ 0.00, 2.00, '#mu_{ttH}' ]

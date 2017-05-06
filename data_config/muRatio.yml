@@ -1,13 +1,16 @@
 Options:
-  ModelName: muRatios_data
-  InputFile: workspaces/WS-HGam-muRatios.root
-  Dataset:   combData
-  NPoints:   100
+  ModelName:  muRatios_data
+  InputFile:  workspaces/WS-HGam-muRatios.root
+  Dataset:    combData
+  Snapshot:   ucmles
+  NPoints:    100
+  Tolerance: 1.0E-05
 
 ParametersOfInterest:
   mu_ggH:      [  0.50, 1.30, '#mu_{ggH}' ]
   muRatio_VBF: [  1.00, 3.00, '#mu_{VBF} / #mu_{ggH}' ]
   muRatio_VH:  [  0.30, 3.10, '#mu_{VH} / #mu_{ggH}'  ]
-  muRatio_ttH: [ -0.30, 1.40, '#mu_{ttH} / #mu_{ggH}' ]
+  muRatio_top: [ -0.30, 1.40, '#mu_{top} / #mu_{ggH}' ]
+  #muRatio_ttH: [ -0.30, 1.40, '#mu_{ttH} / #mu_{ggH}' ]
   #muRatio_WH:  [-0.50, 3.00, '#mu_{WH} / #mu_{ggH}'  ]
   #muRatio_ZH:  [-0.80, 4.00, '#mu_{ZH} / #mu_{ggH}'  ]

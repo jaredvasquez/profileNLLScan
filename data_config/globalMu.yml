@@ -2,7 +2,9 @@ Options:
   ModelName:  globalMu_data
   InputFile:  workspaces/WS-HGam-muGlobal.root
   Dataset:    combData
+  Snapshot:   ucmles
   NPoints:    100
+  Tolerance:  1.0E-04
 
 ParametersOfInterest:
   mu: [ 0.70, 1.20, '#mu' ]
