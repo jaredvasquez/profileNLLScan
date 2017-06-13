@@ -1,0 +1,8 @@
+Options:
+  InputFile: workspaces/WS-HGam-KappaT.root
+  Dataset:   combData
+  NPoints:   100
+  ModelName: kappaT
+
+ParametersOfInterest:
+  CT: [ -1.00, 8.00, '#kappa_{t}' ]

@@ -1,9 +1,9 @@
 Options:
-  InputFile: workspaces/WS-HGam-muRatios.root
+  InputFile: workspaces/AsimovOnly/WS-HGam-muRatios.root
   Dataset:   AsimovSB
   NPoints:   100
   ModelName: muRatios
-  Tolerance: 1.0E-03
+  Tolerance: 1.0E-05
 
 ParametersOfInterest:
   mu_ggH: [ 0.70, 1.50, '#mu_{ggH}' ]

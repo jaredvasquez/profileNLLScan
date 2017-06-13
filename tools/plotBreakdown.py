@@ -79,6 +79,7 @@ for iset, fitset in enumerate(fitsets):
 # Get spline and find 1 sigma and 2 sigma intercepts
 # ---------------------------------------------------------------
 sp = r.TSpline3('s',tg[0])
+midpt = (xmax-xmin)/2.0
 x0  = root(lambda x : sp.Eval(x), x0=midpt).x[0]
 #x2p = root(lambda x: np.abs(4 - sp.Eval(x)), x0=xmax).x[0]
 #x2m = root(lambda x: np.abs(4 - sp.Eval(x)), x0=xmin).x[0]
@@ -99,14 +100,17 @@ can.cd()
 can.SetMargin( 0.10, 0.05, 0.13, 0.15 )
 h = r.TH1F('hist','',npts,xmin,xmax)
 h.SetMaximum(ymax+0.01)
-h.SetMinimum(1e-06)
+h.SetMinimum(1e-04)
 #h.GetXaxis().SetTitle('#mu')
 #h.GetYaxis().SetTitle('#lambda(#mu)')
 h.GetXaxis().SetTitle(POITitle)
-h.GetYaxis().SetTitle('-2 ln #Lambda')
-h.GetYaxis().SetTitleOffset(0.7)
+h.GetYaxis().SetTitle('-2 ln #lambda')
+h.GetXaxis().SetTitleOffset(1.0)
+h.GetYaxis().SetTitleOffset(1.0)
 h.GetXaxis().SetTitleSize(0.05)
 h.GetYaxis().SetTitleSize(0.05)
+h.GetXaxis().SetLabelSize(0.045)
+h.GetYaxis().SetLabelSize(0.045)
 h.Draw('HIST')
 
 

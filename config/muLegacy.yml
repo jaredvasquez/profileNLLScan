@@ -1,5 +1,5 @@
 Options:
-  InputFile: workspaces/WS-HGam-muLegacy.root
+  InputFile: workspaces/AsimovOnly/WS-HGam-muLegacy.root
   Dataset:   AsimovSB
   NPoints:   100
   ModelName: muLegacy

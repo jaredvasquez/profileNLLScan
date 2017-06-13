@@ -1,6 +1,6 @@
 Options:
   ModelName:  globalMu_data
-  InputFile:  workspaces/WS-HGam-muGlobal.root
+  InputFile:  workspaces/data/WS-HGam-muGlobal.root
   Dataset:    combData
   Snapshot:   ucmles
   NPoints:    100

@@ -1,9 +1,9 @@
 Options:
-  InputFile: workspaces/WS-HGam-ProdXS.root
+  InputFile: workspaces/AsimovOnly/WS-HGam-ProdXS.root
   Dataset:   AsimovSB
   NPoints:   100
   ModelName: prodXS
-  Tolerance: 1.0E-03
+  Tolerance: 1.0E-04
 
 ParametersOfInterest:
   mu_ggH: [ 0.70, 1.50, '#sigma / #sigma_{SM} (ggH)' ]

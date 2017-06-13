@@ -1,26 +1,26 @@
 Options:
-  InputFile: workspaces/WS-HGam-STXSMerged.root
+  InputFile: workspaces/AsimovOnly/WS-HGam-STXSMerged.root
   Dataset:   AsimovSB 
   NPoints:   100
   ModelName: muSTXS
-  Tolerance: 1.0E-03
+  Tolerance: 1.0E-05
 
 ParametersOfInterest:
-  mu_gg2H_0J:               [  0.40,  1.60, '#sigma / #sigma_{SM} (ggH, 0J)' ]
-  mu_gg2H_1J_ptH_0_60:      [ -1.00,  3.00, '#sigma / #sigma_{SM} (ggH, 1J Low)' ]
-  mu_gg2H_1J_ptH_60_120:    [ -0.50,  2.50, '#sigma / #sigma_{SM} (ggH, 1J Med)' ]
-  mu_gg2H_1J_ptH_120_200:   [ -1.00,  3.00, '#sigma / #sigma_{SM} (ggH, 1J High)' ]
-  mu_gg2H_1J_ptH_gt200:     [ -3.00,  5.00, '#sigma / #sigma_{SM} (ggH, 1J BSM)' ]
-  mu_gg2H_ge2J_ptH_0_60:    [ -3.00,  5.00, '#sigma / #sigma_{SM} (ggH, 2J Low)' ]
-  mu_gg2H_ge2J_ptH_60_120:  [ -2.00,  4.00, '#sigma / #sigma_{SM} (ggH, 2J Med)' ]
-  mu_gg2H_ge2J_ptH_120_200: [ -2.00,  4.00, '#sigma / #sigma_{SM} (ggH, 2J High)' ]
-  mu_gg2H_ge2J_ptH_gt200:   [ -1.00,  3.00, '#sigma / #sigma_{SM} (ggH, 2J BSM)' ]
-  mu_gg2H_VBFTOPO:          [ -3.00,  5.00, '#sigma / #sigma_{SM} (ggH, VBFTopo)' ]
-  mu_qq2Hqq_VBFTOPO:        [ -0.50,  2.50, '#sigma / #sigma_{SM} (qqH, VBFTopo)' ]
-  mu_qq2Hqq_VH2JREST:       [ -3.00,  5.00, '#sigma / #sigma_{SM} (qqH, VH2J + REST)' ]
-  mu_qq2Hqq_pTjet1_gt200:   [ -3.00,  5.00, '#sigma / #sigma_{SM} (qqH, BSM)' ]
-  mu_VHlep:                 [  0.00,  2.50, '#sigma / #sigma_{SM} (VHlep)' ]
-  mu_top:                   [  0.00,  2.00, '#sigma / #sigma_{SM} (top)' ]
+  mu_gg2H_0J:               [  0.40,  1.60, '#sigma / #sigma_{SM} (ggH, 0-jet)' ]
+  mu_gg2H_1J_ptH_0_60:      [ -1.00,  3.00, '#sigma / #sigma_{SM} (ggH, 1-jet, p_{T}^{H} < 60 GeV)' ]
+  mu_gg2H_1J_ptH_60_120:    [ -0.50,  2.50, '#sigma / #sigma_{SM} (ggH, 1-jet, 60 #leq p_{T}^{H} < 120 GeV)' ]
+  mu_gg2H_1J_ptH_120_200:   [ -1.00,  3.00, '#sigma / #sigma_{SM} (ggH, 1-jet, 120 #leq p_{T}^{H} < 200 GeV)' ]
+  mu_gg2H_1J_ptH_gt200:     [ -3.00,  5.00, '#sigma / #sigma_{SM} (ggH, 1-jet, p_{T}^{H} #geq 200 GeV)' ]
+  mu_gg2H_ge2J_ptH_0_60:    [ -3.00,  5.00, '#sigma / #sigma_{SM} (ggH, #geq 2-jet, p_{T}^{H} < 60 GeV)' ]
+  mu_gg2H_ge2J_ptH_60_120:  [ -2.00,  4.00, '#sigma / #sigma_{SM} (ggH, #geq 2-jet, 60 #leq p_{T}^{H} < 120 GeV)' ]
+  mu_gg2H_ge2J_ptH_120_200: [ -2.00,  4.00, '#sigma / #sigma_{SM} (ggH, #geq 2-jet, 120 #leq p_{T}^{H} < 200 GeV)' ]
+  mu_gg2H_ge2J_ptH_gt200:   [ -1.00,  3.00, '#sigma / #sigma_{SM} (ggH, #geq 2-jet, p_{T}^{H} #geq 200 GeV)' ]
+  mu_gg2H_VBFTOPO:          [ -3.00,  5.00, '#sigma / #sigma_{SM} (ggH, VBF-like)' ]
+  mu_qq2Hqq_VBFTOPO:        [ -0.50,  2.50, '#sigma / #sigma_{SM} (qq #rightarrow Hqq, VBF-like)' ]
+  mu_qq2Hqq_VH2JREST:       [ -3.00,  5.00, '#sigma / #sigma_{SM} (qq #rightarrow Hqq, VH+rest)' ]
+  mu_qq2Hqq_pTjet1_gt200:   [ -3.00,  5.00, '#sigma / #sigma_{SM} (qq #rightarrow Hqq, p_{T}^{j} #geq 200 GeV)' ]
+  mu_VHlep:                 [  0.00,  2.50, '#sigma / #sigma_{SM} (VH, leptonic)' ]
+  mu_top:                   [  0.00,  2.00, '#sigma / #sigma_{SM} (ttH + tH)' ]
   #mu_qq2Hlnu_pTV_0_150:     [ -1.00,  5.00, '#sigma / #sigma_{SM} (WH, p_{T}^{V} < 150 GeV)' ]
   #mu_qq2Hlnu_pTV_gt150:     [ -2.00,  5.00, '#sigma / #sigma_{SM} (WH, p_{T}^{V} > 150 GeV)' ]
   #mu_pp2Hll:                [ -1.00,  4.00, '#sigma / #sigma_{SM} (ZH)' ]

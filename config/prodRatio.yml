@@ -1,0 +1,12 @@
+Options:
+  InputFile: workspaces/AsimovOnly/WS-HGam-prodRatios.root
+  Dataset:   AsimovSB
+  NPoints:   100
+  ModelName: prodRatios
+  Tolerance: 1.0E-03
+
+ParametersOfInterest:
+  mu_ggH: [ 0.70, 1.50, '#sigma_{ggH} / #sigma_{SM}' ]
+  muRatio_VBF: [ 0.40, 2.00, '#sigma_{VBF} / #sigma_{ggH}' ]
+  muRatio_VH:  [-0.50, 3.00, '#sigma_{VH} / #sigma_{ggH}'  ]
+  muRatio_top: [ 0.00, 2.00, '#sigma_{top} / #sigma_{ggH}' ]

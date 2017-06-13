@@ -120,6 +120,7 @@ for POIName in pois:
 
   POIName = POIName.replace('mu_','')
 
+  #x0 = 1
   if not usemu:
     xsecSM = xsec[POIName]
     x0     *= xsecSM

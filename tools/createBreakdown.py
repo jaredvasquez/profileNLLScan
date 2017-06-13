@@ -55,6 +55,7 @@ for POIName in pois:
     # Get points
     # ---------------------------------------------------------------
     minNLL, pts = -999, []
+    muhat = 1.0
 
     tc = r.TChain('nllscan')
     dirPATH = 'output/%s/%s/%s' % (ModelName,POIName,error)
@@ -63,7 +64,9 @@ for POIName in pois:
     for ievt in xrange(npts):
       tc.GetEntry(ievt)
       poiVal = getattr(tc,POIName)
-      if (ievt==0): minNLL = tc.nll
+      if (ievt==0):
+        minNLL = tc.nll
+        muhat = poiVal
       if tc.status:
         print 'WARNING : FIT FAILED @ %s = %f. Skipping Point.' % (POIName, poiVal), error
         continue
@@ -84,7 +87,8 @@ for POIName in pois:
     # Get spline and find 1 sigma and 2 sigma intercepts
     # ---------------------------------------------------------------
     sp = r.TSpline3('s',tg)
-    x0  = root(lambda x : sp.Eval(x), x0=1.0).x[0]
+    x0 = 1.0 #(xmax-xmin)/2.0
+    x0  = root(lambda x : sp.Eval(x), x0=x0).x[0]
     x1p = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmax).x[0]
     x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
     err = [ abs(x0-x1p), -abs(x0-x1m) ]

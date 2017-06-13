@@ -1,5 +1,5 @@
 Options:
-  InputFile: workspaces/WS-HGam-XSMerged.root
+  InputFile: workspaces/AsimovOnly/WS-HGam-XSMerged.root
   Dataset:   AsimovSB
   NPoints:   50
   ModelName: STXS

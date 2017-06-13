@@ -1,14 +1,14 @@
 Options:
   ModelName:  prodXS_data
-  InputFile:  workspaces/WS-HGam-ProdXS.root
+  InputFile:  workspaces/data/WS-HGam-ProdXS.root
   Dataset:    combData
   Snapshot:   ucmles
   NPoints:    100
   Tolerance:  1.0E-04
 
 ParametersOfInterest:
-  mu_ggH: [  0.50, 1.30, '#sigma / #sigma_{SM} (ggH)' ]
-  mu_VBF: [  0.90, 2.10, '#sigma / #sigma_{SM} (VBF)' ]
+  mu_ggH: [  0.55, 1.00, '#sigma / #sigma_{SM} (ggH)' ]
+  mu_VBF: [  0.90, 2.20, '#sigma / #sigma_{SM} (VBF)' ]
   mu_VH:  [  0.30, 2.50, '#sigma / #sigma_{SM} (VH)'  ]
   mu_top: [ -0.30, 1.05, '#sigma / #sigma_{SM} (top)' ]
   #mu_ttH: [ -0.30, 1.05, '#sigma / #sigma_{SM} (ttH)' ]
