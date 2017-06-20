@@ -1,0 +1,18 @@
+Options:
+  InputFile: workspaces/AsimovOnly/WS-HGam-Strong.root
+  Dataset:   AsimovSB 
+  NPoints:   100
+  ModelName: STRONG
+  Tolerance: 1.0E-05
+
+ParametersOfInterest:
+  mu_gg2H_0J:               [  0.40,  2.20, '#sigma / #sigma_{SM} (ggH, 0-jet)' ]
+  mu_gg2H_1J_ptH_0_60:      [  0.00,  2.00, '#sigma / #sigma_{SM} (ggH, 1-jet, p_{T}^{H} < 60 GeV)' ]
+  mu_gg2H_1J_ptH_60_120:    [  0.30,  1.80, '#sigma / #sigma_{SM} (ggH, 1-jet, 60 #leq p_{T}^{H} < 120 GeV)' ]
+  mu_gg2H_1J_ptH_120_200:   [  0.00,  2.30, '#sigma / #sigma_{SM} (ggH, 1-jet, 120 #leq p_{T}^{H} < 200 GeV)' ]
+  mu_gg2H_ge1J_ptH_gt200_minus_qq2Hqq_pTjet1_gt200: [ -1.20,  3.00, '#sigma / #sigma_{SM} (ggH - qq #rightarrow Hqq, BSM-like)' ]
+  mu_gg2H_ge1J_ptH_gt200_plus_qq2Hqq_pTjet1_gt200:  [  0.00,  2.00, '#sigma / #sigma_{SM} (ggH + qq #rightarrow Hqq, BSM-like)' ]
+  mu_gg2H_ge2J_ptH_0_200_VBFtopo : [ 0.20,  2.10, '#sigma / #sigma_{SM} (ggH, #geq 2-jet)' ]
+  mu_qq2Hqq_pTjet1_0_200:   [  0.40,  2.00, '#sigma / #sigma_{SM} (qq #rightarrow Hqq, p_{T}^{j} < 200 GeV)' ]
+  mu_VHlep:                 [  0.00,  2.50, '#sigma / #sigma_{SM} (VH, leptonic)' ]
+  mu_top:                   [  0.20,  2.00, '#sigma / #sigma_{SM} (ttH + tH)' ]

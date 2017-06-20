@@ -1,17 +1,5 @@
 CrossSections:
 
-  ## ggH + ggZH
-  #gg2H_0J               : 6.192E+01
-  #gg2H_1J_ptH_0_60      : 1.477E+01
-  #gg2H_1J_ptH_60_120    : 1.024E+01
-  #gg2H_1J_ptH_120_200   : 1.691E+00
-  #gg2H_1J_ptH_gt200     : 3.420E-01
-  #gg2H_ge2J_ptH_0_60    : 2.788E+00
-  #gg2H_ge2J_ptH_60_120  : 4.287E+00
-  #gg2H_ge2J_ptH_120_200 : 2.305E+00
-  #gg2H_ge2J_ptH_gt200   : 9.836E-01
-  #gg2H_VBFTOPO          : 1.445E+00
-  
   # ggH + ggZH + bbH
   gg2H_0J                 : 6.2541E+01
   gg2H_1J_ptH_0_60        : 1.4918E+01
@@ -39,3 +27,9 @@ CrossSections:
   bbH                   : 1.041E+00
   tHW                   : 3.406E-02
   tHqb                  : 1.552E-01
+
+  gg2H_ge2J_ptH_0_200_VBFtopo                   : 1.093E+01
+  qq2Hqq_pTjet1_0_200                           : 1.040E+01
+  gg2H_ge1J_ptH_gt200_plus_qq2Hqq_pTjet1_gt200  : 1.839E+00
+  gg2H_ge1J_ptH_gt200_minus_qq2Hqq_pTjet1_gt200 : 1.839E+00
+

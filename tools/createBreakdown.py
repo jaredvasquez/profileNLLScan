@@ -6,7 +6,7 @@ import ROOT as r
 import numpy as np
 from math import sqrt
 from collections import OrderedDict
-from scipy.optimize import root, fsolve
+from scipy.optimize import root, fsolve, minimize
 
 # ---------------------------------------------------------------
 replace = {
@@ -59,13 +59,21 @@ for POIName in pois:
 
     tc = r.TChain('nllscan')
     dirPATH = 'output/%s/%s/%s' % (ModelName,POIName,error)
-    for i in xrange(npts): tc.AddFile( os.path.join(dirPATH,'result_%d.root'%i) )
+    for i in xrange(npts):
+      filepath = os.path.join(dirPATH,'result_%d.root'%i)
+      if not os.path.isfile(filepath):
+        print '   WARNING:: File %s does not exist' % filepath
+      else:
+        tc.AddFile(filepath)
+
+    npts = tc.GetEntries()
 
     for ievt in xrange(npts):
       tc.GetEntry(ievt)
       poiVal = getattr(tc,POIName)
       if (ievt==0):
         minNLL = tc.nll
+      if (ievt == 0 and error == 'TOTAL'):
         muhat = poiVal
       if tc.status:
         print 'WARNING : FIT FAILED @ %s = %f. Skipping Point.' % (POIName, poiVal), error
@@ -87,10 +95,11 @@ for POIName in pois:
     # Get spline and find 1 sigma and 2 sigma intercepts
     # ---------------------------------------------------------------
     sp = r.TSpline3('s',tg)
-    x0 = 1.0 #(xmax-xmin)/2.0
-    x0  = root(lambda x : sp.Eval(x), x0=x0).x[0]
-    x1p = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmax).x[0]
-    x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
+    width = (xmax-xmin)
+    x0  = root(lambda x : sp.Eval(x), x0=muhat).x[0]
+    x1p = root(lambda x: np.abs(1 - sp.Eval(x)), x0=(xmax - 0.2*width)).x[0]
+    x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=(xmin + 0.2*width)).x[0]
+
     err = [ abs(x0-x1p), -abs(x0-x1m) ]
 
     #print error

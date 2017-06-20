@@ -1,0 +1,20 @@
+Options:
+  InputFile: workspaces/data/WS-HGam-STRONG.root
+  ModelName: STRONG_data
+  Dataset:   combData
+  Snapshot:  ucmles
+  NPoints:   100
+  Tolerance: 1.0E-05
+
+ParametersOfInterest:
+  mu_gg2H_0J:               [  0.30,  1.10, '#sigma / #sigma_{SM} (ggH, 0-jet)' ]
+  mu_gg2H_1J_ptH_0_60:      [ -0.10,  1.90, '#sigma / #sigma_{SM} (ggH, 1-jet, p_{T}^{H} < 60 GeV)' ]
+  mu_gg2H_1J_ptH_60_120:    [ -0.10,  1.30, '#sigma / #sigma_{SM} (ggH, 1-jet, 60 #leq p_{T}^{H} < 120 GeV)' ]
+  mu_gg2H_1J_ptH_120_200:   [  0.50,  2.80, '#sigma / #sigma_{SM} (ggH, 1-jet, 120 #leq p_{T}^{H} < 200 GeV)' ]
+  mu_gg2H_ge2J_ptH_0_200_VBFtopo : [ 1.00,  3.60, '#sigma / #sigma_{SM} (ggH, #geq 2-jet)' ]
+  mu_qq2Hqq_pTjet1_0_200:   [ 0.80,  2.30, '#sigma / #sigma_{SM} (qq #rightarrow Hqq, p_{T}^{j} < 200 GeV)' ]
+  mu_gg2H_ge1J_ptH_gt200_plus_qq2Hqq_pTjet1_gt200:  [  0.20,  2.30, '#sigma / #sigma_{SM} (ggH + qq #rightarrow Hqq, BSM-like)' ]
+  mu_gg2H_ge1J_ptH_gt200_minus_qq2Hqq_pTjet1_gt200: [  0.00,  6.00, '#sigma / #sigma_{SM} (ggH - qq #rightarrow Hqq, BSM-like)' ]
+  mu_VHlep:                 [  -0.50,  1.70, '#sigma / #sigma_{SM} (VH, leptonic)' ]
+  mu_top:                   [  -0.10,  1.20, '#sigma / #sigma_{SM} (ttH + tH)' ]
+

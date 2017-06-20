@@ -8,7 +8,8 @@ from math import sqrt
 from collections import OrderedDict
 from scipy.optimize import root, fsolve
 
-xsec = yaml.safe_load(open('tools/prodXS.yml'))['CrossSections']
+xsec = yaml.safe_load(open('tools/STXSCrossSections.yml'))['CrossSections']
+poiNames = yaml.safe_load(open('tools/stxsNames.yml'))
 
 usemu = ('mu' in sys.argv[2::])
 
@@ -55,14 +56,7 @@ for POIName in pois:
 
     tc = r.TChain('nllscan')
     dirPATH = 'output/%s/%s/%s' % (ModelName,POIName,error)
-    for i in xrange(npts):
-      filepath = os.path.join(dirPATH,'result_%d.root'%i)
-      if not os.path.isfile(filepath):
-        print '   WARNING:: File %s does not exist' % filepath
-      else:
-        tc.AddFile(filepath)
-
-    npts = tc.GetEntries()
+    for i in xrange(npts): tc.AddFile( os.path.join(dirPATH,'result_%d.root'%i) )
 
     for ievt in xrange(npts):
       tc.GetEntry(ievt)
@@ -152,7 +146,7 @@ for POIName in pois:
     statHI *= xsecSM
     statLO *= xsecSM
 
-  name = '\sigma_{\mathrm{%s}}' % POIName.replace('_','\_')
+  name = poiNames[POIName]
   print template % ( name, x0, totHI, totLO, x0, statHI, statLO, expHI, expLO, theoHI, theoLO), status
 
 

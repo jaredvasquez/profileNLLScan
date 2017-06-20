@@ -40,10 +40,13 @@ ModelName = options['ModelName']
 POIName = sys.argv[2]
 POITitle = config['ParametersOfInterest'][POIName][2]
 
+#xmin = config['ParametersOfInterest'][POIName][0]
+#xmax = config['ParametersOfInterest'][POIName][1]
+
 
 # Get points
 # ---------------------------------------------------------------
-midpt = 1.0
+muhat = 1.0
 ymax = 1.2
 for iset, fitset in enumerate(fitsets):
   minNLL = -999
@@ -51,14 +54,20 @@ for iset, fitset in enumerate(fitsets):
 
   tc = r.TChain('nllscan')
   dirPATH = 'output/%s/%s/%s' % (ModelName,POIName, fitset)
-  for i in xrange(npts): tc.AddFile( os.path.join(dirPATH,'result_%d.root'%i) )
+  for i in xrange(npts):
+    filepath = os.path.join(dirPATH,'result_%d.root'%i)
+    if not os.path.isfile(filepath):
+      print '   WARNING:: File %s does not exist' % filepath
+    else:
+      tc.AddFile( filepath )
+
+  npts = tc.GetEntries()
 
   for ievt in xrange(npts):
     tc.GetEntry(ievt)
-    midpt = 1.0
     poiVal = getattr(tc,POIName)
-    if (iset==0 & ievt==0):
-      midpt = poiVal
+    if (iset==0 and ievt== 0):
+      muhat = poiVal
     if (ievt==0): minNLL = tc.nll
     if tc.status:
       print 'WARNING : FIT FAILED IN %s @ %s = %f. POINT %d. Skipping Point.' % (fitset, POIName, poiVal, ievt)
@@ -79,16 +88,19 @@ for iset, fitset in enumerate(fitsets):
 # Get spline and find 1 sigma and 2 sigma intercepts
 # ---------------------------------------------------------------
 sp = r.TSpline3('s',tg[0])
-midpt = (xmax-xmin)/2.0
-x0  = root(lambda x : sp.Eval(x), x0=midpt).x[0]
+width = (xmax-xmin)
+x0  = root(lambda x : sp.Eval(x), x0=muhat).x[0]
 #x2p = root(lambda x: np.abs(4 - sp.Eval(x)), x0=xmax).x[0]
 #x2m = root(lambda x: np.abs(4 - sp.Eval(x)), x0=xmin).x[0]
 x1p = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmax).x[0]
 x1m = root(lambda x: np.abs(1 - sp.Eval(x)), x0=xmin).x[0]
-xbs = [ None, (x1m,x1p) ] #, (x2m,x2p) ]
+xbs = [ None, (x1m, x1p) ] #, (x2m,x2p) ]
 errors = [ ( abs(x0-x1p), -abs(x0-x1m) ) ]
 
 if (x0 < xmin): x0 = xmin
+if (x0 > xmax): x0 = xmax
+
+print '%10s - %.2f   %.2f   %.2f  (%.2f, %.2f)' % (POIName, x0, x1p, x1m, (xmax - 0.1*width), (xmin + 0.1*width))
 
 print ' %s = %.3f +/- (%.3f,%.3f) \n' % ( POIName, x0, errors[0][0], errors[0][1] )
 #print ' %s = %.3f +/- (%.3f,%.3f) ++/-- (%.3f,%.3f) \n' % ( POIName, x0, errors[0][0], errors[0][1], errors[1][0], errors[1][1] )

@@ -13,3 +13,8 @@ qq2Hqq_VH2JREST:       '\sigma (qq \rightarrow Hqq, \mathrm{VH+rest})'
 qq2Hqq_pTjet1_gt200:   '\sigma (qq \rightarrow Hqq, p_{T}^{j} \geq 200\ \GeV)'
 VHlep:                 '\sigma (\mathrm{VH, leptonic})'
 top:                   '\sigma (ttH + tH)'
+
+gg2H_ge2J_ptH_0_200_VBFtopo:                   '\sigma (ggH, \geq 2-jet)'
+qq2Hqq_pTjet1_0_200 :                          '\sigma (qq \rightarrow Hqq, p_{T}^{j} < 200 GeV)'
+gg2H_ge1J_ptH_gt200_plus_qq2Hqq_pTjet1_gt200:  '\sigma (ggH + qq \rightarrow Hqq, BSM-like)'
+gg2H_ge1J_ptH_gt200_minus_qq2Hqq_pTjet1_gt200: '\sigma (ggH - qq \rightarrow Hqq, BSM-like)'
